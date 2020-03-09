@@ -1,4 +1,5 @@
 import 'package:webfeed/util/datetime.dart';
+import 'package:webfeed/util/helpers.dart';
 import 'package:webfeed/util/iterable.dart';
 import 'package:xml/xml.dart';
 
@@ -7,7 +8,7 @@ class DublinCore {
   final String? description;
   final String? creator;
   final String? subject;
-  final List<String> subjects;
+  final List<String>? subjects;
   final String? publisher;
   final String? contributor;
   final DateTime? date;
@@ -50,7 +51,7 @@ class DublinCore {
       creator: element.findElements('dc:creator').firstOrNull?.text,
       subject: element.findElements('dc:subject').firstOrNull?.text,
       subjects: findAllDirectElementsOrNull(element, 'dc:subject')
-          .map((subjectElement) => subjectElement.text)
+          ?.map((subjectElement) => subjectElement.text)
           .toList(),
       publisher: element.findElements('dc:publisher').firstOrNull?.text,
       contributor: element.findElements('dc:contributor').firstOrNull?.text,

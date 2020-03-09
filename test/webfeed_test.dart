@@ -9,9 +9,9 @@ void main() {
     final rss1XmlFile = File('test/xml/RSS1-with-dublin-core-module.xml');
     final rss2XmlFile = File('test/xml/RSS.xml');
 
-    String atomXmlString;
-    String rss1XmlString;
-    String rss2XmlString;
+    String? atomXmlString;
+    String? rss1XmlString;
+    String? rss2XmlString;
 
     setUpAll(() async {
       final loadFileFutures = [
@@ -45,14 +45,14 @@ void main() {
       final atomFeed = WebFeed.fromXmlString(atomXmlString);
 
       // then
-      expect(atomFeed.title, 'Foo bar news');
-      expect(atomFeed.description, 'This is subtitle');
-      expect(atomFeed.links.first, 'http://foo.bar.news/');
-      expect(atomFeed.items.first.title, 'Foo bar item 1');
-      expect(atomFeed.items.first.body, 'This is summary 1');
+      expect(atomFeed?.title, 'Foo bar news');
+      expect(atomFeed?.description, 'This is subtitle');
+      expect(atomFeed?.links?.first, 'http://foo.bar.news/');
+      expect(atomFeed?.items?.first.title, 'Foo bar item 1');
+      expect(atomFeed?.items?.first.body, 'This is summary 1');
       expect(
-        atomFeed.items.first.updated,
-        DateTime.parse('2018-04-06T13:02:47Z'),
+        atomFeed?.items?.first.updated,
+        DateTime.parse('2018-04-06T13:02:40Z'),
       );
     });
 
@@ -61,37 +61,37 @@ void main() {
       final rss1Feed = WebFeed.fromXmlString(rss1XmlString);
 
       // then
-      expect(rss1Feed.title, 'Meerkat');
-      expect(rss1Feed.description, 'Meerkat: An Open Wire Service');
-      expect(rss1Feed.links.first, 'http://meerkat.oreillynet.com');
-      expect(rss1Feed.items.first.title, 'XML: A Disruptive Technology');
+      expect(rss1Feed?.title, 'Meerkat');
+      expect(rss1Feed?.description, 'Meerkat: An Open Wire Service');
+      expect(rss1Feed?.links?.first, 'http://meerkat.oreillynet.com');
+      expect(rss1Feed?.items?.first.title, 'XML: A Disruptive Technology');
       expect(
-        rss1Feed.items.first.body,
+        rss1Feed?.items?.first.body,
         'XML is placing increasingly heavy loads on the existing technical infrastructure of the Internet.',
       );
-      expect(rss1Feed.items.first.updated, null);
+      expect(rss1Feed?.items?.first.updated, null);
     });
 
     test('it can parse RSS2.0 feed.', () {
       // when
       final rss2Feed = WebFeed.fromXmlString(rss2XmlString);
-      
+
       // then
-      expect(rss2Feed.title, 'News - Foo bar News');
+      expect(rss2Feed?.title, 'News - Foo bar News');
       expect(
-        rss2Feed.description,
+        rss2Feed?.description,
         'Foo bar News and Updates feed provided by Foo bar, Inc.',
       );
-      expect(rss2Feed.links.first, 'https://foo.bar.news/');
+      expect(rss2Feed?.links?.first, 'https://foo.bar.news/');
       expect(
-        rss2Feed.items.first.title,
+        rss2Feed?.items?.first.title,
         'The standard Lorem Ipsum passage, used since the 1500s',
       );
       expect(
-        rss2Feed.items.first.body,
+        rss2Feed?.items?.first.body,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
       );
-      expect(rss2Feed.items.first.updated, null);
+      expect(rss2Feed?.items?.first.updated, null);
     });
   });
 }

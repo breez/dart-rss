@@ -36,3 +36,6 @@
 ## [0.3.0](https://pub.dartlang.org/packages/webfeed/versions/0.3.0)
 ### Added
 - Support for image namespace
+
+### Note :memo:
+- Special thanks :eyes: -> https://pub.dev/packages/webfeed

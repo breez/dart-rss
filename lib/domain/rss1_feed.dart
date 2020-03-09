@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:webfeed/domain/dublin_core/dublin_core.dart';
 import 'package:webfeed/domain/rss1_item.dart';
+import 'package:webfeed/util/datetime.dart';
 import 'package:webfeed/util/helpers.dart';
 import 'package:xml/xml.dart';
 
@@ -14,15 +15,15 @@ enum UpdatePeriod {
 }
 
 class Rss1Feed {
-  final String title;
-  final String description;
-  final String link;
-  final String image;
-  final List<Rss1Item> items;
-  final UpdatePeriod updatePeriod;
-  final int updateFrequency;
-  final DateTime updateBase;
-  final DublinCore dc;
+  final String? title;
+  final String? description;
+  final String? link;
+  final String? image;
+  final List<Rss1Item>? items;
+  final UpdatePeriod? updatePeriod;
+  final int? updateFrequency;
+  final DateTime? updateBase;
+  final DublinCore? dc;
 
   Rss1Feed({
     this.title,
@@ -36,7 +37,7 @@ class Rss1Feed {
     this.dc,
   });
 
-  static UpdatePeriod _parseUpdatePeriod(String updatePeriodString) {
+  static UpdatePeriod? _parseUpdatePeriod(String? updatePeriodString) {
     switch (updatePeriodString) {
       case 'hourly':
         return UpdatePeriod.Hourly;

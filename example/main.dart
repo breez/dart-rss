@@ -10,7 +10,8 @@ void main() async {
 
   // RSS feed
   var response = await client.get(
-      Uri.parse('https://developer.apple.com/news/releases/rss/releases.rss'));
+      Uri.parse('https://developer.apple.com/news/releases/rss/releases.rss')
+      );
   var channel = RssFeed.parse(response.body);
   print(channel);
 
