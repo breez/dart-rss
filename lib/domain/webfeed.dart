@@ -2,20 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss1_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
+import 'package:webfeed/util/datetime.dart';
 import 'package:xml/xml.dart' as xml;
-
-extension SafeParseDateTime on DateTime {
-  static DateTime? safeParse(String? str) {
-    if (str == null) {
-      return null;
-    }
-    try {
-      return DateTime.parse(str);
-    } catch (_) {
-      return null;
-    }
-  }
-}
 
 enum RssVersion {
   RSS1,
@@ -45,59 +33,73 @@ class WebFeed {
     switch (rssVersion) {
       case RssVersion.RSS1:
         final rss1Feed = Rss1Feed.parse(xmlString);
-        return WebFeed(
-          title: rss1Feed.title,
-          description: rss1Feed.description,
-          links: [rss1Feed.link],
-          items: (rss1Feed.items ?? [])
-              .map(
-                (item) => WebFeedItem(
-                    title: item.title,
-                    body: item.description ?? item.dc?.description,
-                    updated: item.dc?.date,
-                    links: [item.link]),
-              )
-              .toList(),
-        );
+        return WebFeed.fromRss1(rss1Feed);
       case RssVersion.RSS2:
         final rss2Feed = RssFeed.parse(xmlString);
-        return WebFeed(
-          title: rss2Feed.title,
-          description: rss2Feed.description,
-          links: [rss2Feed.link],
-          items: rss2Feed.items
-              ?.map(
-                (item) => WebFeedItem(
-                  title: item.title,
-                  body: item.description ?? item.dc?.description,
-                  updated: item.dc?.date,
-                ),
-              )
-              .toList(),
-        );
+        return WebFeed.fromRss2(rss2Feed);
       case RssVersion.Atom:
         final atomFeed = AtomFeed.parse(xmlString);
-        return WebFeed(
-          title: atomFeed.title,
-          description: atomFeed.subtitle,
-          links: atomFeed.links?.map((atomLink) => atomLink.href).toList(),
-          items: atomFeed.items
-              ?.map(
-                (item) => WebFeedItem(
-                  title: item.title,
-                  body: item.summary,
-                  updated: item.updated,
-                  links: item.links?.map((atomLink) => atomLink.href).toList(),
-                ),
-              )
-              .toList(),
-        );
+        return WebFeed.fromAtom(atomFeed);
       case RssVersion.Unknown:
         throw Error.safeToString(
             'Invalid XML String? We cannot detect RSS/Atom version.');
       default:
         throw Exception('Some error has occured.');
     }
+  }
+
+  static WebFeed fromRss1(Rss1Feed rss1feed) {
+    return WebFeed(
+      title: rss1feed.title ?? rss1feed.dc?.title ?? '',
+      description: rss1feed.description ?? rss1feed.dc?.description ?? '',
+      links: [rss1feed.link],
+      items: rss1feed.items
+          ?.map(
+            (item) => WebFeedItem(
+              title: item.title ?? item.dc?.title ?? '',
+              body: item.description ?? item.dc?.description ?? '',
+              updated: item.dc?.date,
+              links: [item.link],
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  static WebFeed fromRss2(RssFeed rssFeed) {
+    return WebFeed(
+      title: rssFeed.title ?? rssFeed.dc?.title ?? '',
+      description: rssFeed.description ?? rssFeed.dc?.description ?? '',
+      links: [rssFeed.link],
+      items: rssFeed.items
+          ?.map(
+            (item) => WebFeedItem(
+              title: item.title ?? item.dc?.title ?? '',
+              body: item.description ?? item.dc?.description ?? '',
+              updated: item.pubDate ?? item.dc?.date,
+              links: [item.link],
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  static WebFeed fromAtom(AtomFeed atomFeed) {
+    return WebFeed(
+      title: atomFeed.title ?? '',
+      description: atomFeed.subtitle ?? '',
+      links: atomFeed.links?.map((atomLink) => atomLink.href).toList(),
+      items: atomFeed.items
+          ?.map(
+            (item) => WebFeedItem(
+              title: item.title ?? '',
+              body: item.summary ?? item.content ?? '',
+              updated: item.updated ?? parseDateTime(item.published),
+              links: item.links?.map((atomLink) => atomLink.href).toList(),
+            ),
+          )
+          .toList(),
+    );
   }
 
   static Future<WebFeed?> fromUrl(String? url) async {
