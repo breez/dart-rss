@@ -19,12 +19,12 @@ A dart package for parsing RSS1.0 / RSS2.0 / Atom feed.
 
 Add this line into your `pubspec.yaml`
 ```
-webfeed: ^0.7.0
+webfeed: ^1.0.1
 ```
 
 Import the package into your dart code using:
 ```
-import 'package:webfeed/dart_rss.dart';
+import 'package:webfeed/webfeed.dart';
 ```
 
 ### Example
@@ -33,7 +33,7 @@ To parse string into `RssFeed` object use:
 ```
 var rssFeed = RssFeed.parse(xmlString); // for parsing RSS 2.0 feed
 var atomFeed = AtomFeed.parse(xmlString); // for parsing Atom feed
-var rss1Feed = new RssFeed.parse(xmlString); // for parsing RSS 1.0 feed
+var rss1Feed = Rss1Feed.parse(xmlString); // for parsing RSS 1.0 feed
 ```
 
 ### Preview
@@ -120,7 +120,7 @@ feed.updateFrequency
 feed.updateBase
 feed.dc
 
-RssItem item = feed.items.first;
+Rss1Item item = feed.items.first;
 item.title
 item.description
 item.link
