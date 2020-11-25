@@ -4,6 +4,7 @@ import 'package:webfeed/domain/rss1_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 import 'package:webfeed/util/datetime.dart';
 import 'package:xml/xml.dart' as xml;
+import 'package:xml/xml.dart';
 
 enum RssVersion {
   RSS1,
@@ -115,7 +116,7 @@ class WebFeed {
     if (xmlString == null) {
       return null;
     }
-    final xmlDoc = xml.parse(xmlString);
+    final xmlDoc = XmlDocument.parse(xmlString);
     final rdfRefs = xmlDoc.findAllElements('rdf:RDF');
     final rssRefs = xmlDoc.findAllElements('rss');
     final feedRefs = xmlDoc.findAllElements('feed');
