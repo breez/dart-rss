@@ -14,6 +14,7 @@ A dart package for parsing RSS1.0 / RSS2.0 / Atom feed.
     - [x] Dublin Core
     - [x] iTunes
     - [x] Syndication
+    - [x] Podcast (Phase 1)
 
 ### Installing
 
