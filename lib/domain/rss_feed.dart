@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:webfeed/domain/dublin_core/dublin_core.dart';
+import 'package:webfeed/domain/podcast_index/rss_podcast_index.dart';
 import 'package:webfeed/domain/itunes/itunes.dart';
 import 'package:webfeed/domain/rss_category.dart';
 import 'package:webfeed/domain/rss_cloud.dart';
@@ -34,6 +35,7 @@ class RssFeed {
   final DublinCore? dc;
   final Itunes? itunes;
   final Syndication? syndication;
+  final RssPodcastIndex? podcastIndex;
 
   RssFeed({
     this.title,
@@ -58,6 +60,7 @@ class RssFeed {
     this.dc,
     this.itunes,
     this.syndication,
+    this.podcastIndex,
   });
 
   factory RssFeed.parse(String xmlString) {
@@ -93,17 +96,13 @@ class RssFeed {
           .map((e) => RssCategory.parse(e))
           .toList(),
       skipDays: channelElement
-              .findElements('skipDays')
-              .firstOrNull
-              ?.findAllElements('day')
-              .map((e) => e.text)
+              .findElements('skipDays').firstOrNull
+              ?.findAllElements('day').map((e) => e.text)
               .toList() ??
           [],
       skipHours: channelElement
-              .findElements('skipHours')
-              .firstOrNull
-              ?.findAllElements('hour')
-              .map((e) => int.tryParse(e.text) ?? 0)
+              .findElements('skipHours').firstOrNull
+              ?.findAllElements('hour').map((e) => int.tryParse(e.text) ?? 0)
               .toList() ??
           [],
       lastBuildDate:
@@ -121,6 +120,7 @@ class RssFeed {
       dc: DublinCore.parse(channelElement),
       itunes: Itunes.parse(channelElement),
       syndication: Syndication.parse(channelElement),
+      podcastIndex: RssPodcastIndex.parse(channelElement),
     );
   }
 }
