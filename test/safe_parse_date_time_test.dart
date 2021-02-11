@@ -18,5 +18,10 @@ void main() {
       expect(date?.month, 7);
       expect(date?.day, 2);
     });
+
+    test('incorrect date returns null', () {
+      final date = parseDateTime('Tue 12');
+      expect(date, null);
+    });
   });
 }

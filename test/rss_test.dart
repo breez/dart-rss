@@ -320,9 +320,9 @@ void main() {
     expect(feed.itunes!.keywords, 'go,golang,open source,software,development'.split(','));
     expect(feed.itunes!.owner!.name, 'Changelog Media');
     expect(feed.itunes!.owner!.email, 'editors@changelog.com');
-    expect(Set.from([feed.itunes!.categories![0].category, feed.itunes!.categories![1].category]), ['Technology', 'Foo']);
+    expect(Set.from([feed.itunes!.categories![0]!.category, feed.itunes!.categories![1]!.category]), ['Technology', 'Foo']);
     for (var category in feed.itunes!.categories!) {
-      switch (category.category) {
+      switch (category!.category) {
         case 'Foo':
           expect(category.subCategories, ['Bar', 'Baz']);
           break;
