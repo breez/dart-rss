@@ -13,7 +13,10 @@ class Thumbnail {
     this.time,
   });
 
-  factory Thumbnail.parse(XmlElement element) {
+  static Thumbnail? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Thumbnail(
       url: element.getAttribute('url'),
       width: element.getAttribute('width'),

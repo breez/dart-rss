@@ -13,7 +13,10 @@ class Player {
     this.value,
   });
 
-  factory Player.parse(XmlElement element) {
+  static Player? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Player(
       url: element.getAttribute('url'),
       width: int.tryParse(element.getAttribute('width') ?? '0'),

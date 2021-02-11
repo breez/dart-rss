@@ -11,7 +11,10 @@ class Credit {
     this.value,
   });
 
-  factory Credit.parse(XmlElement element) {
+  static Credit? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Credit(
       role: element.getAttribute('role'),
       scheme: element.getAttribute('scheme'),

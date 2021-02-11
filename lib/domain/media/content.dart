@@ -33,7 +33,10 @@ class Content {
     this.lang,
   });
 
-  factory Content.parse(XmlElement element) {
+  static Content? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Content(
       url: element.getAttribute('url'),
       type: element.getAttribute('type'),

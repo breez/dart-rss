@@ -14,7 +14,10 @@ class Embed {
     this.params,
   });
 
-  factory Embed.parse(XmlElement element) {
+  static Embed? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Embed(
       url: element.getAttribute('url'),
       width: int.tryParse(element.getAttribute('width') ?? '0'),
@@ -22,6 +25,7 @@ class Embed {
       params: element
           .findElements('media:param')
           .map((e) => Param.parse(e))
+          .whereType<Param>()
           .toList(),
     );
   }

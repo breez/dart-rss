@@ -9,7 +9,10 @@ class Hash {
     this.value,
   });
 
-  factory Hash.parse(XmlElement element) {
+  static Hash? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Hash(
       algo: element.getAttribute('algo'),
       value: element.text,

@@ -13,7 +13,10 @@ class Price {
     this.currency,
   });
 
-  factory Price.parse(XmlElement element) {
+  static Price? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Price(
       price: double.tryParse(element.getAttribute('price') ?? '0'),
       type: element.getAttribute('type'),

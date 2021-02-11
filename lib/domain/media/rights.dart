@@ -7,7 +7,10 @@ class Rights {
     this.status,
   });
 
-  factory Rights.parse(XmlElement element) {
+  static Rights? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Rights(
       status: element.getAttribute('status'),
     );

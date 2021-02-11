@@ -63,7 +63,10 @@ class RssFeed {
     this.podcastIndex,
   });
 
-  factory RssFeed.parse(String xmlString) {
+  static RssFeed? parse(String? xmlString) {
+    if (xmlString == null) {
+      return null;
+    }
     var document = XmlDocument.parse(xmlString);
     var rss = document.findElements('rss').firstOrNull;
     var rdf = document.findElements('rdf:RDF').firstOrNull;
@@ -82,6 +85,7 @@ class RssFeed {
       items: (rdf ?? channelElement)
           .findElements('item')
           .map((e) => RssItem.parse(e))
+          .whereType<RssItem>()
           .toList(),
       image: (rdf ?? channelElement)
           .findElements('image')
@@ -94,6 +98,7 @@ class RssFeed {
       categories: channelElement
           .findElements('category')
           .map((e) => RssCategory.parse(e))
+          .whereType<RssCategory>()
           .toList(),
       skipDays: channelElement
               .findElements('skipDays').firstOrNull

@@ -39,7 +39,10 @@ class AtomItem {
     this.media,
   });
 
-  factory AtomItem.parse(XmlElement element) {
+  static AtomItem? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return AtomItem(
       id: element.findElements('id').firstOrNull?.text,
       title: element.findElements('title').firstOrNull?.text,
@@ -47,16 +50,22 @@ class AtomItem {
       authors: element
           .findElements('author')
           .map((e) => AtomPerson.parse(e))
+          .whereType<AtomPerson>()
           .toList(),
-      links:
-          element.findElements('link').map((e) => AtomLink.parse(e)).toList(),
+      links: element
+          .findElements('link')
+          .map((e) => AtomLink.parse(e))
+          .whereType<AtomLink>()
+          .toList(),
       categories: element
           .findElements('category')
           .map((e) => AtomCategory.parse(e))
+          .whereType<AtomCategory>()
           .toList(),
       contributors: element
           .findElements('contributor')
           .map((e) => AtomPerson.parse(e))
+          .whereType<AtomPerson>()
           .toList(),
       source: element
           .findElements('source')

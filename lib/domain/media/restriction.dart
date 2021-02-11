@@ -11,7 +11,10 @@ class Restriction {
     this.value,
   });
 
-  factory Restriction.parse(XmlElement element) {
+  static Restriction? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Restriction(
       relationship: element.getAttribute('relationship'),
       type: element.getAttribute('type'),

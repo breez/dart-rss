@@ -14,7 +14,10 @@ class Scene {
     this.endTime,
   });
 
-  factory Scene.parse(XmlElement element) {
+  static Scene? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Scene(
       title: element.findElements('sceneTitle').firstOrNull?.text,
       description: element.findElements('sceneDescription').firstOrNull?.text,

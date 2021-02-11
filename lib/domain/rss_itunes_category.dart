@@ -2,7 +2,7 @@ import 'package:xml/xml.dart';
 
 class RssItunesCategory {
   final String? category;
-  final List<String?> subCategories;
+  final List<String>? subCategories;
 
   const RssItunesCategory({
     this.category,
@@ -22,8 +22,8 @@ class RssItunesCategory {
       category: element.getAttribute('text')?.trim(),
       subCategories: subCategories
               ?.map((ele) => ele.getAttribute('text')?.trim())
-              ?.toList() ??
-          <String>[],
+              .whereType<String>()
+              .toList() ?? [],
     );
   }
 }

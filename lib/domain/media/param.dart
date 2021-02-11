@@ -9,7 +9,10 @@ class Param {
     this.value,
   });
 
-  factory Param.parse(XmlElement element) {
+  static Param? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Param(
       name: element.getAttribute('name'),
       value: element.text,

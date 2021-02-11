@@ -8,7 +8,10 @@ class RssImage {
 
   RssImage({this.title, this.url, this.link});
 
-  factory RssImage.parse(XmlElement element) {
+  static RssImage? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return RssImage(
       title: element.findElements('title').firstOrNull?.text,
       url: element.findElements('url').firstOrNull?.text,

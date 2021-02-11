@@ -46,7 +46,10 @@ class RssItem {
     this.podcastIndex,
   });
 
-  factory RssItem.parse(XmlElement element) {
+  static RssItem? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return RssItem(
       title: element.findElements('title').firstOrNull?.text,
       description: element.findElements('description').firstOrNull?.text,
@@ -54,6 +57,7 @@ class RssItem {
       categories: element
           .findElements('category')
           .map((e) => RssCategory.parse(e))
+          .whereType<RssCategory>()
           .toList(),
       guid: element.findElements('guid').firstOrNull?.text,
       pubDate: parseDateTime(element.findElements('pubDate').firstOrNull?.text),

@@ -35,7 +35,7 @@ class RssItemItunes {
     this.block,
   });
 
-  RssItemItunes? parse(XmlElement? element) {
+  static RssItemItunes? parse(XmlElement? element) {
     if (element == null) {
       return null;
     }

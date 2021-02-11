@@ -19,7 +19,10 @@ class Rss1Item {
     this.content,
   });
 
-  factory Rss1Item.parse(XmlElement element) {
+  static Rss1Item? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Rss1Item(
       title: findElementOrNull(element, "title")?.text,
       description: findElementOrNull(element, "description")?.text,

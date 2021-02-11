@@ -8,7 +8,10 @@ class AtomPerson {
 
   AtomPerson({this.name, this.uri, this.email});
 
-  factory AtomPerson.parse(XmlElement element) {
+  static AtomPerson? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return AtomPerson(
       name: element.findElements('name').firstOrNull?.text,
       uri: element.findElements('uri').firstOrNull?.text,

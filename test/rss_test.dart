@@ -12,14 +12,14 @@ void main() {
     var xmlString = File('test/xml/Invalid.xml').readAsStringSync();
 
     try {
-      RssFeed.parse(xmlString);
+      RssFeed.parse(xmlString)!;
       fail('Should throw Argument Error');
     } on ArgumentError {}
   });
   test('parse RSS.xml', () {
     var xmlString = File('test/xml/RSS.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.title, 'News - Foo bar News');
     expect(feed.description, 'Foo bar News and Updates feed provided by Foo bar, Inc.');
@@ -88,7 +88,7 @@ void main() {
   test('parse RSS-Media.xml', () {
     var xmlString = File('test/xml/RSS-Media.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
     expect(feed.title, 'Song Site');
     expect(feed.description, 'Media RSS example with new fields added in v1.5.0');
 
@@ -225,7 +225,7 @@ void main() {
   test('parse RSS-DC.xml', () {
     var xmlString = File('test/xml/RSS-DC.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.dc!.title, 'title');
     expect(feed.dc!.creator, 'creator');
@@ -267,7 +267,7 @@ void main() {
   test('parse RSS-Empty.xml', () {
     var xmlString = File('test/xml/RSS-Empty.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.title, null);
     expect(feed.description, null);
@@ -311,7 +311,7 @@ void main() {
   test('parse RSS-Itunes.xml', () {
     var xmlString = File('test/xml/RSS-Itunes.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.itunes!.author, 'Changelog Media');
     expect(feed.itunes!.summary, 'Foo');
@@ -360,7 +360,7 @@ void main() {
     var xmlString =
         File('test/xml/RSS-Itunes_item_empty_field.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.itunes?.owner?.name, 'Changelog Media');
     var item = feed.items![0];
@@ -372,7 +372,7 @@ void main() {
   test('parse RSS-RDF.xml', () {
     var xmlString = File('test/xml/RSS-RDF.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.title, 'Mozilla Dot Org');
     expect(feed.link, 'http://www.mozilla.org');
@@ -388,7 +388,7 @@ void main() {
   test('parse RSS-Syndication.xml', () {
     var xmlString = File('test/xml/RSS-Syndication.xml').readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.title, 'Meerkat');
     expect(feed.link, 'http://meerkat.oreillynet.com');
@@ -409,7 +409,7 @@ void main() {
   test('parse RSS-PodcastIndex-R1.xml', () {
     var xmlString = File("test/xml/RSS-PodcastIndex-R1.xml").readAsStringSync();
 
-    var feed = RssFeed.parse(xmlString);
+    var feed = RssFeed.parse(xmlString)!;
 
     expect(feed.title, 'Podcasting 2.0 Namespace Example');
     expect(

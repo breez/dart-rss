@@ -39,7 +39,10 @@ class AtomFeed {
     this.subtitle,
   });
 
-  factory AtomFeed.parse(String xmlString) {
+  static AtomFeed? parse(String? xmlString) {
+    if (xmlString == null) {
+      return null;
+    }
     var document = XmlDocument.parse(xmlString);
     var feedElement = document.findElements('feed').firstOrNull;
     if (feedElement == null) {
@@ -54,22 +57,27 @@ class AtomFeed {
       items: feedElement
           .findElements('entry')
           .map((e) => AtomItem.parse(e))
+          .whereType<AtomItem>()
           .toList(),
       links: feedElement
           .findElements('link')
           .map((e) => AtomLink.parse(e))
+          .whereType<AtomLink>()
           .toList(),
       authors: feedElement
           .findElements('author')
           .map((e) => AtomPerson.parse(e))
+          .whereType<AtomPerson>()
           .toList(),
       contributors: feedElement
           .findElements('contributor')
           .map((e) => AtomPerson.parse(e))
+          .whereType<AtomPerson>()
           .toList(),
       categories: feedElement
           .findElements('category')
           .map((e) => AtomCategory.parse(e))
+          .whereType<AtomCategory>()
           .toList(),
       generator: feedElement
           .findElements('generator')

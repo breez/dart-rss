@@ -17,7 +17,7 @@ void main() {
   test('parse Atom.xml', () {
     var xmlString = File('test/xml/Atom.xml').readAsStringSync();
 
-    var feed = AtomFeed.parse(xmlString);
+    var feed = AtomFeed.parse(xmlString)!;
 
     expect(feed.id, 'foo-bar-id');
     expect(feed.title, 'Foo bar news');
@@ -91,7 +91,7 @@ void main() {
   test('parse Atom-Media.xml', () {
     var xmlString = File('test/xml/Atom-Media.xml').readAsStringSync();
 
-    var feed = AtomFeed.parse(xmlString);
+    var feed = AtomFeed.parse(xmlString)!;
     expect(feed.id, 'foo-bar-id');
     expect(feed.title, 'Foo bar news');
     expect(feed.updated, DateTime.utc(2018, 4, 6, 13, 2, 46));
@@ -227,7 +227,7 @@ void main() {
   test('parse Atom-Empty.xml', () {
     var xmlString = File('test/xml/Atom-Empty.xml').readAsStringSync();
 
-    var feed = AtomFeed.parse(xmlString);
+    var feed = AtomFeed.parse(xmlString)!;
 
     expect(feed.id, null);
     expect(feed.title, null);

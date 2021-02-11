@@ -18,15 +18,20 @@ class Group {
     this.rating,
   });
 
-  factory Group.parse(XmlElement element) {
+  static Group? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Group(
       contents: element
           .findElements('media:content')
           .map((e) => Content.parse(e))
+          .whereType<Content>()
           .toList(),
       credits: element
           .findElements('media:credit')
           .map((e) => Credit.parse(e))
+          .whereType<Credit>()
           .toList(),
       category: element
           .findElements('media:category')

@@ -44,7 +44,10 @@ class DublinCore {
     this.rights,
   });
 
-  factory DublinCore.parse(XmlElement element) {
+  static DublinCore? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return DublinCore(
       title: element.findElements('dc:title').firstOrNull?.text,
       description: element.findElements('dc:description').firstOrNull?.text,

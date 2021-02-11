@@ -23,7 +23,7 @@ class WebFeed {
 
   final String? title;
   final String? description;
-  final List<String?>? links;
+  final List<String>? links;
   final List<WebFeedItem>? items;
 
   static WebFeed? fromXmlString(String? xmlString) {
@@ -49,54 +49,63 @@ class WebFeed {
     }
   }
 
-  static WebFeed fromRss1(Rss1Feed rss1feed) {
+  static WebFeed? fromRss1(Rss1Feed? rss1feed) {
+    if (rss1feed == null) {
+      return null;
+    }
     return WebFeed(
       title: rss1feed.title ?? rss1feed.dc?.title ?? '',
       description: rss1feed.description ?? rss1feed.dc?.description ?? '',
-      links: [rss1feed.link],
+      links: [rss1feed.link].whereType<String>().toList(),
       items: rss1feed.items
           ?.map(
             (item) => WebFeedItem(
               title: item.title ?? item.dc?.title ?? '',
               body: item.description ?? item.dc?.description ?? '',
               updated: item.dc?.date,
-              links: [item.link],
+              links: [item.link].whereType<String>().toList(),
             ),
           )
           .toList(),
     );
   }
 
-  static WebFeed fromRss2(RssFeed rssFeed) {
+  static WebFeed? fromRss2(RssFeed? rssFeed) {
+    if (rssFeed == null) {
+      return null;
+    }
     return WebFeed(
       title: rssFeed.title ?? rssFeed.dc?.title ?? '',
       description: rssFeed.description ?? rssFeed.dc?.description ?? '',
-      links: [rssFeed.link],
+      links: [rssFeed.link].whereType<String>().toList(),
       items: rssFeed.items
           ?.map(
             (item) => WebFeedItem(
               title: item.title ?? item.dc?.title ?? '',
               body: item.description ?? item.dc?.description ?? '',
               updated: item.pubDate ?? item.dc?.date,
-              links: [item.link],
+              links: [item.link].whereType<String>().toList(),
             ),
           )
           .toList(),
     );
   }
 
-  static WebFeed fromAtom(AtomFeed atomFeed) {
+  static WebFeed? fromAtom(AtomFeed? atomFeed) {
+    if (atomFeed == null) {
+      return null;
+    }
     return WebFeed(
       title: atomFeed.title ?? '',
       description: atomFeed.subtitle ?? '',
-      links: atomFeed.links?.map((atomLink) => atomLink.href).toList(),
+      links: atomFeed.links?.map((atomLink) => atomLink.href).whereType<String>().toList(),
       items: atomFeed.items
           ?.map(
             (item) => WebFeedItem(
               title: item.title ?? '',
               body: item.summary ?? item.content ?? '',
               updated: item.updated ?? parseDateTime(item.published),
-              links: item.links?.map((atomLink) => atomLink.href).toList(),
+              links: item.links?.map((atomLink) => atomLink.href).whereType<String>().toList(),
             ),
           )
           .toList(),
@@ -145,6 +154,6 @@ class WebFeedItem {
 
   final String? title;
   final String? body;
-  final List<String?>? links;
+  final List<String>? links;
   final DateTime? updated;
 }

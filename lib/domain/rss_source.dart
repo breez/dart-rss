@@ -6,7 +6,10 @@ class RssSource {
 
   RssSource(this.url, this.value);
 
-  factory RssSource.parse(XmlElement element) {
+  static RssSource? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     var url = element.getAttribute('url');
     var value = element.text;
 

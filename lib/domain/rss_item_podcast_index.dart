@@ -6,8 +6,8 @@ import 'package:xml/xml.dart';
 
 class RssItemPodcastIndex {
   final RssPodcastIndexChapters? chapters;
-  final List<RssPodcastIndexTranscript?>? transcripts;
-  final List<RssPodcastIndexSoundbite?>? soundbites;
+  final List<RssPodcastIndexTranscript>? transcripts;
+  final List<RssPodcastIndexSoundbite>? soundbites;
 
   RssItemPodcastIndex({
     this.chapters,
@@ -24,10 +24,10 @@ class RssItemPodcastIndex {
       chapters: RssPodcastIndexChapters.parse(findElementOrNull(element, "podcast:chapters")),
       transcripts: element.findElements("podcast:transcript").map((e) {
         return RssPodcastIndexTranscript.parse(e);
-      }).toList(),
+      }).whereType<RssPodcastIndexTranscript>().toList(),
       soundbites: element.findElements("podcast:soundbite").map((e) {
         return RssPodcastIndexSoundbite.parse(e);
-      }).toList(),
+      }).whereType<RssPodcastIndexSoundbite>().toList(),
     );
   }
 }

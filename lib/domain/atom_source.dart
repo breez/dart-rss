@@ -12,7 +12,10 @@ class AtomSource {
     this.updated,
   });
 
-  factory AtomSource.parse(XmlElement element) {
+  static AtomSource? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return AtomSource(
       id: element.findElements('id').firstOrNull?.text,
       title: element.findElements('title').firstOrNull?.text,

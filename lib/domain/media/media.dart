@@ -78,7 +78,10 @@ class Media {
     this.scenes,
   });
 
-  factory Media.parse(XmlElement element) {
+  static Media? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     return Media(
       group: element
           .findElements('media:group')
@@ -87,10 +90,12 @@ class Media {
       contents: element
           .findElements('media:content')
           .map((e) => Content.parse(e))
+          .whereType<Content>()
           .toList(),
       credits: element
           .findElements('media:credit')
           .map((e) => Credit.parse(e))
+          .whereType<Credit>()
           .toList(),
       category: element
           .findElements('media:category')
@@ -111,6 +116,7 @@ class Media {
       thumbnails: element
           .findElements('media:thumbnail')
           .map((e) => Thumbnail.parse(e))
+          .whereType<Thumbnail>()
           .toList(),
       hash: element
           .findElements('media:hash')
@@ -168,6 +174,7 @@ class Media {
       prices: element
           .findElements('media:price')
           .map((e) => Price.parse(e))
+          .whereType<Price>()
           .toList(),
       license: element
           .findElements('media:license')
@@ -186,6 +193,7 @@ class Media {
               .firstOrNull
               ?.findElements('media:scene')
               .map((e) => Scene.parse(e))
+              .whereType<Scene>()
               .toList() ??
           [],
     );

@@ -54,22 +54,29 @@ class Rss1Feed {
     }
   }
 
-  factory Rss1Feed.parse(String xmlString) {
-    var document = XmlDocument.parse(xmlString);
-    XmlElement rdfElement;
+  static Rss1Feed? parse(String? xmlString) {
+    if (xmlString == null) {
+      return null;
+    }
+
+    final document = XmlDocument.parse(xmlString);
+    XmlElement? rdfElement;
     try {
       rdfElement = document.findAllElements("rdf:RDF").first;
     } on StateError {
       throw ArgumentError("channel not found");
     }
 
+    final channel = rdfElement.findElements('channel');
     return Rss1Feed(
       title: findElementOrNull(rdfElement, "title")?.text,
       link: findElementOrNull(rdfElement, "link")?.text,
       description: findElementOrNull(rdfElement, "description")?.text,
-      items: rdfElement.findElements("item").map((element) {
-        return Rss1Item.parse(element);
-      }).toList(),
+      items: rdfElement
+          .findElements("item")
+          .map((element) => Rss1Item.parse(element))
+          .whereType<Rss1Item>()
+          .toList(),
       image:
           findElementOrNull(rdfElement, 'image')?.getAttribute('rdf:resource'),
       updatePeriod: _parseUpdatePeriod(
@@ -78,7 +85,7 @@ class Rss1Feed {
           parseInt(findElementOrNull(rdfElement, 'sy:updateFrequency')?.text),
       updateBase:
           parseDateTime(findElementOrNull(rdfElement, 'sy:updateBase')?.text),
-      dc: DublinCore.parse(rdfElement.findElements('channel').first),
+      dc: channel.isEmpty ? null : DublinCore.parse(rdfElement.findElements('channel').first),
     );
   }
 }

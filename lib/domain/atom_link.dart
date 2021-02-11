@@ -17,15 +17,19 @@ class AtomLink {
     this.length,
   );
 
-  factory AtomLink.parse(XmlElement element) {
+  static AtomLink? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     var href = element.getAttribute('href');
     var rel = element.getAttribute('rel');
     var type = element.getAttribute('type');
     var title = element.getAttribute('title');
     var hreflang = element.getAttribute('hreflang');
     var length = 0;
-    if (element.getAttribute('length') != null) {
-      length = int.parse(element.getAttribute('length')!);
+    final lengthElement = element.getAttribute('length');
+    if (lengthElement != null) {
+      length = int.parse(lengthElement);
     }
     return AtomLink(href, rel, type, hreflang, title, length);
   }

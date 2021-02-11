@@ -7,7 +7,7 @@ import 'package:webfeed/domain/rss1_feed.dart';
 void main() {
   test('parse basic RSS 1.0', () {
     final xmlString = File('test/xml/RSS1-basic.xml').readAsStringSync();
-    final feed = new Rss1Feed.parse(xmlString);
+    final feed = Rss1Feed.parse(xmlString)!;
 
     expect(feed.title, 'XML.com');
     expect(feed.link, 'http://xml.com/pub');
@@ -29,7 +29,7 @@ void main() {
   test('parse RSS1 with syndication module', () {
     final xmlString =
         File('test/xml/RSS1-with-syndication-module.xml').readAsStringSync();
-    final feed = new Rss1Feed.parse(xmlString);
+    final feed = Rss1Feed.parse(xmlString)!;
 
     expect(feed.title, 'Meerkat');
     expect(feed.link, 'http://meerkat.oreillynet.com');
@@ -43,7 +43,7 @@ void main() {
   test('parse RSS1 with dublin core module', () {
     final xmlString =
         File('test/xml/RSS1-with-dublin-core-module.xml').readAsStringSync();
-    final feed = new Rss1Feed.parse(xmlString);
+    final feed = Rss1Feed.parse(xmlString)!;
 
     expect(feed.title, 'Meerkat');
     expect(feed.link, 'http://meerkat.oreillynet.com');
@@ -72,7 +72,7 @@ void main() {
   test('parse RSS1 with content module', () {
     final xmlString =
         File('test/xml/RSS1-with-content-module.xml').readAsStringSync();
-    final feed = new Rss1Feed.parse(xmlString);
+    final feed = Rss1Feed.parse(xmlString)!;
 
     expect(feed.title, 'Example Feed');
     expect(feed.link, 'http://www.example.org');
@@ -92,10 +92,8 @@ void main() {
   // Japanese Social Bookmark Service "Hatena Bookmark" is still using RSS1.0!
   // As I don't know english service using RSS 1.0, I use Japanese service for test case.
   test("parse production RSS1.0", () {
-    var xmlString =
-        new File("test/xml/RSS1-production_hatena.xml").readAsStringSync();
-
-    var feed = new Rss1Feed.parse(xmlString);
+    var xmlString = File("test/xml/RSS1-production_hatena.xml").readAsStringSync();
+    var feed = Rss1Feed.parse(xmlString)!;
 
     expect(feed.title, 'sampleのはてなブックマーク');
     expect(feed.link, 'https://b.hatena.ne.jp/sample/bookmark');

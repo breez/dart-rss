@@ -15,7 +15,10 @@ class RssCloud {
     this.protocol,
   );
 
-  factory RssCloud.parse(XmlElement node) {
+  static RssCloud? parse(XmlElement? node) {
+    if (node == null) {
+      return null;
+    }
     var domain = node.getAttribute('domain');
     var port = node.getAttribute('port');
     var path = node.getAttribute('path');

@@ -7,7 +7,10 @@ class AtomCategory {
 
   AtomCategory(this.term, this.scheme, this.label);
 
-  factory AtomCategory.parse(XmlElement element) {
+  static AtomCategory? parse(XmlElement? element) {
+    if (element == null) {
+      return null;
+    }
     var term = element.getAttribute('term');
     var scheme = element.getAttribute('scheme');
     var label = element.getAttribute('label');
