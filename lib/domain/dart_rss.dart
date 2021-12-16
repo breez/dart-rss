@@ -1,8 +1,8 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dart_rss/dart_rss.dart';
 import 'package:http/http.dart' as http;
-import 'package:dart_rss/domain/atom_feed.dart';
 import 'package:dart_rss/domain/rss1_feed.dart';
-import 'package:dart_rss/domain/rss_feed.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:intl/intl.dart';
 
@@ -142,7 +142,7 @@ class WebFeed {
         : rssRefs.first.getAttribute('version')?.contains('2');
     xmlns = feedRefs.isEmpty
         ? false
-        : feedRefs.first.getAttribute('xmlns')?.toLowerCase()?.contains('atom');
+        : feedRefs.first.getAttribute('xmlns')?.toLowerCase().contains('atom');
 
     if (rdfRefs.isNotEmpty) {
       return RssVersion.RSS1;

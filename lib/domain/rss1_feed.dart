@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:core';
 
 import 'package:dart_rss/domain/dublin_core/dublin_core.dart';
