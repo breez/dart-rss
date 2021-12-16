@@ -18,7 +18,7 @@ class RssContent {
 
   static RssContent? parse(XmlElement? element) {
     if (element == null) return null;
-    final dynamic? content = element.text;
+    final content = element.text;
     final images = <String>[];
     _imagesRegExp.allMatches(content).forEach((match) {
       var group = match.group(1);

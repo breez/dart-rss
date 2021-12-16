@@ -11,6 +11,7 @@ void main() {
     try {
       AtomFeed.parse(xmlString);
       fail('Should throw Argument Error');
+    // ignore: empty_catches
     } on ArgumentError {}
   });
 

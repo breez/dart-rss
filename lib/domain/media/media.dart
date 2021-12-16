@@ -194,8 +194,7 @@ class Media {
               ?.findElements('media:scene')
               .map((e) => Scene.parse(e))
               .whereType<Scene>()
-              .toList() ??
-          [],
+              .toList() ?? [],
     );
   }
 }

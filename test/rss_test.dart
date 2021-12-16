@@ -14,6 +14,7 @@ void main() {
     try {
       RssFeed.parse(xmlString)!;
       fail('Should throw Argument Error');
+      // ignore: empty_catches
     } on ArgumentError {}
   });
   test('parse RSS.xml', () {
@@ -478,23 +479,23 @@ void main() {
     expect(soundbite2[0]?.duration, 56.0);
 
     expect(value2!.type, 'lightning');
-    expect(value2!.method, 'keysend');
-    expect(value2!.suggested, '0.00000005000');
-    expect(value2!.recipients.length, 2);
-    expect(value2!.recipients[0]!.name, 'podcaster');
-    expect(value2!.recipients[0]!.type, 'node');
-    expect(value2!.recipients[0]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
-    expect(value2!.recipients[0]!.customKey, null);
-    expect(value2!.recipients[0]!.customValue, null);
-    expect(value2!.recipients[0]!.split, '50');
-    expect(value2!.recipients[0]!.fee, null);
-    expect(value2!.recipients[1]!.name, 'hosting company');
-    expect(value2!.recipients[1]!.type, 'node');
-    expect(value2!.recipients[1]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
-    expect(value2!.recipients[1]!.customKey, null);
-    expect(value2!.recipients[1]!.customValue, null);
-    expect(value2!.recipients[1]!.split, '50');
-    expect(value2!.recipients[1]!.fee, null);
+    expect(value2.method, 'keysend');
+    expect(value2.suggested, '0.00000005000');
+    expect(value2.recipients.length, 2);
+    expect(value2.recipients[0]!.name, 'podcaster');
+    expect(value2.recipients[0]!.type, 'node');
+    expect(value2.recipients[0]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
+    expect(value2.recipients[0]!.customKey, null);
+    expect(value2.recipients[0]!.customValue, null);
+    expect(value2.recipients[0]!.split, '50');
+    expect(value2.recipients[0]!.fee, null);
+    expect(value2.recipients[1]!.name, 'hosting company');
+    expect(value2.recipients[1]!.type, 'node');
+    expect(value2.recipients[1]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
+    expect(value2.recipients[1]!.customKey, null);
+    expect(value2.recipients[1]!.customValue, null);
+    expect(value2.recipients[1]!.split, '50');
+    expect(value2.recipients[1]!.fee, null);
   });
   test("parse RSS-PodcastIndex-R1-NoPodcastValue.xml", () {
     var xmlString = File("test/xml/RSS-PodcastIndex-R1-NoPodcastValue.xml").readAsStringSync();
@@ -514,22 +515,22 @@ void main() {
     var value2 = item2.podcastIndex!.value;
 
     expect(value2!.type, 'lightning');
-    expect(value2!.method, 'keysend');
-    expect(value2!.suggested, '0.00000005000');
-    expect(value2!.recipients.length, 2);
-    expect(value2!.recipients[0]!.name, 'podcaster');
-    expect(value2!.recipients[0]!.type, 'node');
-    expect(value2!.recipients[0]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
-    expect(value2!.recipients[0]!.customKey, null);
-    expect(value2!.recipients[0]!.customValue, null);
-    expect(value2!.recipients[0]!.split, '50');
-    expect(value2!.recipients[0]!.fee, null);
-    expect(value2!.recipients[1]!.name, 'hosting company');
-    expect(value2!.recipients[1]!.type, 'node');
-    expect(value2!.recipients[1]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
-    expect(value2!.recipients[1]!.customKey, null);
-    expect(value2!.recipients[1]!.customValue, null);
-    expect(value2!.recipients[1]!.split, '50');
-    expect(value2!.recipients[1]!.fee, null);
+    expect(value2.method, 'keysend');
+    expect(value2.suggested, '0.00000005000');
+    expect(value2.recipients.length, 2);
+    expect(value2.recipients[0]!.name, 'podcaster');
+    expect(value2.recipients[0]!.type, 'node');
+    expect(value2.recipients[0]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
+    expect(value2.recipients[0]!.customKey, null);
+    expect(value2.recipients[0]!.customValue, null);
+    expect(value2.recipients[0]!.split, '50');
+    expect(value2.recipients[0]!.fee, null);
+    expect(value2.recipients[1]!.name, 'hosting company');
+    expect(value2.recipients[1]!.type, 'node');
+    expect(value2.recipients[1]!.address, '036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57');
+    expect(value2.recipients[1]!.customKey, null);
+    expect(value2.recipients[1]!.customValue, null);
+    expect(value2.recipients[1]!.split, '50');
+    expect(value2.recipients[1]!.fee, null);
   });
 }

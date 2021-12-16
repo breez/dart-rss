@@ -42,7 +42,7 @@ List<XmlElement>? findAllDirectElementsOrNull(
 bool? parseBoolLiteral(XmlElement? element, String? tagName) {
   if (element == null) return null;
   if (tagName == null) return null;
-  var v = findElementOrNull(element, tagName)?.text?.toLowerCase()?.trim();
+  var v = findElementOrNull(element, tagName)?.text.toLowerCase().trim();
   if (v == null) return null;
   return ["yes", "true"].contains(v);
 }
