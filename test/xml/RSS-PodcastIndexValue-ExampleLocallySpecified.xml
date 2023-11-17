@@ -1,0 +1,61 @@
+<!-- Example from https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md#example-locally-specified -->
+<rss xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md"
+    version="2.0">
+    <channel>
+        <title>Cool Pod</title>
+        <description>This is a cool pod</description>
+        <link>https://example.com/rss-cool-pod.xml</link>
+        <language>en</language>
+        <pubDate>Fri, 21 Apr 2023 18:56:30 -0500</pubDate>
+        <podcast:medium>podcast</podcast:medium>
+        <item>
+            <title>Adam Hates the word "pod" (and I do, too)</title>
+            <otherTagsHere>...</otherTagsHere>
+            <podcast:value
+                method="keysend"
+                type="lightning">
+                <podcast:valueRecipient
+                    name="Alice (Podcaster)"
+                    address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52"
+                    split="95"
+                    type="node" />
+                <podcast:valueRecipient
+                    name="Hosting Provider"
+                    address="03ae9f91a0cb8ff43840e3c322c4c61f019d8c1c3cea15a25cfc425ac605e61a4a"
+                    fee="true"
+                    split="5"
+                    type="node" />
+
+                <podcast:valueTimeSplit
+                    duration="388"
+                    startTime="63">
+                    <podcast:valueRecipient
+                        name="Alice (Podcaster)"
+                        address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52"
+                        split="85"
+                        type="node" />
+                    <podcast:valueRecipient
+                        name="Jimbob (Guest)"
+                        address="02dd306e68c46681aa21d88a436fb35355a8579dd30201581cefa17cb179fc4c15"
+                        split="10"
+                        type="node" />
+                </podcast:valueTimeSplit>
+
+                <podcast:valueTimeSplit
+                    duration="246"
+                    startTime="367">
+                    <podcast:valueRecipient
+                        name="Alice (Podcaster)"
+                        address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52"
+                        split="85"
+                        type="node" />
+                    <podcast:valueRecipient
+                        name="Bobjim (Guest)"
+                        address="032f4ffbbafffbe51726ad3c164a3d0d37ec27bc67b29a159b0f49ae8ac21b8508"
+                        split="10"
+                        type="node" />
+                </podcast:valueTimeSplit>
+            </podcast:value>
+        </item>
+    </channel>
+</rss>

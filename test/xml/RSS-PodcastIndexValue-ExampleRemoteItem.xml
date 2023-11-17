@@ -1,0 +1,52 @@
+<!-- Example from https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md#example-remote-item -->
+<rss xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md"
+    version="2.0">
+    <channel>
+        <title>Metal Showcase</title>
+        <description>A great playlist of my favorite metal tracks.</description>
+        <link>https://example.com/rss-metal-showcase.xml</link>
+        <language>en</language>
+        <pubDate>Fri, 21 Apr 2023 18:56:30 -0500</pubDate>
+        <podcast:medium>music</podcast:medium>
+        <item>
+            <title>Special interview with Torcon VII</title>
+            <otherTagsHere>...</otherTagsHere>
+            <podcast:value
+                method="keysend"
+                type="lightning">
+                <podcast:valueRecipient
+                    name="Alice (Podcaster)"
+                    address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52"
+                    split="95"
+                    type="node" />
+                <podcast:valueRecipient
+                    name="Hosting Provider"
+                    address="03ae9f91a0cb8ff43840e3c322c4c61f019d8c1c3cea15a25cfc425ac605e61a4a"
+                    fee="true"
+                    split="5"
+                    type="node" />
+
+                <podcast:valueTimeSplit
+                    duration="237"
+                    remotePercentage="95"
+                    startTime="60">
+                    <podcast:remoteItem
+                        feedGuid="a94f5cc9-8c58-55fc-91fe-a324087a655b"
+                        itemGuid="https://podcastindex.org/podcast/4148683#1"
+                        medium="music" />
+                </podcast:valueTimeSplit>
+
+                <podcast:valueTimeSplit
+                    duration="53"
+                    remotePercentage="95"
+                    remoteStartTime="174"
+                    startTime="330">
+                    <podcast:remoteItem
+                        feedGuid="a94f5cc9-8c58-55fc-91fe-a324087a655b"
+                        itemGuid="https://podcastindex.org/podcast/4148683#3"
+                        medium="music" />
+                </podcast:valueTimeSplit>
+            </podcast:value>
+        </item>
+    </channel>
+</rss>
